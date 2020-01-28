@@ -1,0 +1,467 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Modules &#8212; Python for you and me 0.4.alpha1 documentation</title>
+    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://assets.readthedocs.org/static/css/badge_only.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-doc-embed.js"></script>
+
+    
+    
+     
+        <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script type="text/javascript" src="_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Collections module" href="collections.html" />
+    <link rel="prev" title="Class" href="classes.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<!-- RTD Extra Head -->
+
+<!-- 
+Always link to the latest version, as canonical.
+http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="https://pymbook.readthedocs.io/en/latest/modules.html" />
+
+<link rel="stylesheet" href="https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css" type="text/css" />
+
+<script type="text/javascript" src="_static/readthedocs-data.js"></script>
+
+<!-- Add page-specific data, which must exist in the page js, not global -->
+<script type="text/javascript">
+READTHEDOCS_DATA['page'] = "modules"
+READTHEDOCS_DATA['source_suffix'] = ".rst"
+</script>
+
+<script type="text/javascript" src="https://assets.readthedocs.org/static/javascript/readthedocs-analytics.js"></script>
+
+<!-- end RTD <extrahead> -->
+</head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="collections.html" title="Collections module"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="classes.html" title="Class"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">Python for you and me 0.4.alpha1 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="modules">
+<h1>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter we are going to learn about Python modules.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Up until now, all the code we wrote in the Python interpreter was lost when we exited the interpreter. But when people write large programs they tend to break their code into multiple different files for ease of use, debugging and readability. In Python we use <em>modules</em> to achieve such goals. Modules are nothing but files with Python definitions and statements. The module name, to import, has the same name of the Python file without the .py extension.</p>
+<p>You can find the name of the module by accessing the <em>__name__</em> variable. It is a global variable.</p>
+<p>Now we are going to see how modules work. Create a file called bars.py. Content of the file is given bellow.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Bars Module</span>
+<span class="sd">============</span>
+<span class="sd">This is an example module with provide different ways to print bars.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">starbar</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Prints a bar with *</span>
+
+<span class="sd">    :arg num: Length of the bar</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="n">num</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">hashbar</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Prints a bar with #</span>
+
+<span class="sd">    :arg num: Length of the bar</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">*</span> <span class="n">num</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">simplebar</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Prints a bar with -</span>
+
+<span class="sd">    :arg num: Length of the bar</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="n">num</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we are going to start the Python interpreter and import our module.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">bars</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>This will import the module bars. We have to use the module name to access functions inside the module.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bars</span><span class="o">.</span><span class="n">hashbar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">##########</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bars</span><span class="o">.</span><span class="n">simplebar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">----------</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bars</span><span class="o">.</span><span class="n">starbar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">**********</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="importing-modules">
+<h2>Importing modules<a class="headerlink" href="#importing-modules" title="Permalink to this headline">¶</a></h2>
+<p>There are different ways to import modules. We already saw one way to do this. You can even import selected functions from modules. To do so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bars</span> <span class="k">import</span> <span class="n">simplebar</span><span class="p">,</span> <span class="n">starbar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">simplebar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">--------------------</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Never do <em>from module import *</em> Read <a class="reference external" href="http://docs.python.org/2/faq/programming.html#what-are-the-best-practices-for-using-import-in-a-module">this link</a> for more information.</p>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<p>We can have many submodules inside a module. A directory with a <em>__init__.py</em> can also be used as a module and all <em>.py</em> files inside it become submodules.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tree mymodule
+mymodule
+|-- bars.py
+|-- __init__.py
+`-- utils.py
+</pre></div>
+</div>
+<p>In this example <em>mymodule</em> is the module name and <em>bars</em> and <em>utils</em> are two submodules in it. You can create an empty <em>__init__.py</em> using touch command.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ touch mymodule/__init__.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="all-in-init-py">
+<h2>__all__ in __init__.py<a class="headerlink" href="#all-in-init-py" title="Permalink to this headline">¶</a></h2>
+<p>If <cite>__init__.py</cite> file contains a list called <cite>__all__</cite>, then only the names listed there will
+be public. So if the mymodule’s <cite>__init__.py</cite>
+file contains the following</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mymodule.bars</span> <span class="k">import</span> <span class="n">simplebar</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="n">simplebar</span><span class="p">,</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>Then from mymodule only <cite>simplebar</cite> will be available.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em>from mymodule import *</em> will only work for module level objects, trying to use it to import functions or classes
+will cause syntax error.</p>
+</div>
+</div>
+<div class="section" id="default-modules">
+<h2>Default modules<a class="headerlink" href="#default-modules" title="Permalink to this headline">¶</a></h2>
+<p>Now your Python installation comes with different modules installed, you can use them as required and install new modules for any other special purposes. In the following few examples we are going to see many examples on the same.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">()</span>
+
+<span class="go">Welcome to Python 3.5&#39;s help utility!</span>
+
+<span class="go">If this is your first time using Python, you should definitely check out</span>
+<span class="go">the tutorial on the Internet at http://docs.python.org/3.5/tutorial/.</span>
+
+<span class="go">Enter the name of any module, keyword, or topic to get help on writing</span>
+<span class="go">Python programs and using Python modules.  To quit this help utility and</span>
+<span class="go">return to the interpreter, just type &quot;quit&quot;.</span>
+
+<span class="go">To get a list of available modules, keywords, symbols, or topics, type</span>
+<span class="go">&quot;modules&quot;, &quot;keywords&quot;, &quot;symbols&quot;, or &quot;topics&quot;.  Each module also comes</span>
+<span class="go">with a one-line summary of what it does; to list the modules whose name</span>
+<span class="go">or summary contain a given string such as &quot;spam&quot;, type &quot;modules spam&quot;.</span>
+
+<span class="go">help&gt; modules</span>
+</pre></div>
+</div>
+<p>The above example shows how to get the list of all installed modules in your system. I am not pasting them here as it is a big list in my system :)</p>
+<p>You can also use <em>help()</em> function in the interpeter to find documentation about any module/classes. Say you want to know all available methods in strings, you can use the following method</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-os">
+<h2>Module os<a class="headerlink" href="#module-os" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://docs.python.org/3/library/os.html#module-os" title="(in Python v3.8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">os</span></code></a> module provides operating system dependent functionality. You can import it using the following import statement.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+<p><em>getuid()</em> function returns the current process’s effective user’s id.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">getuid</span><span class="p">()</span>
+<span class="go">500</span>
+</pre></div>
+</div>
+<p><em>getpid()</em> returns the current process’s id. <em>getppid()</em> returns the parent process’s id.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
+<span class="go">16150</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">getppid</span><span class="p">()</span>
+<span class="go">14847</span>
+</pre></div>
+</div>
+<p><em>uname()</em> returns different information identifying the operating system, in Linux it returns details you can get from the <em>uname</em> command. The returned object is a tuple, <em>(sysname, nodename, release, version, machine)</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">uname</span><span class="p">()</span>
+<span class="go">(&#39;Linux&#39;, &#39;d80&#39;, &#39;2.6.34.7-56.fc13.i686.PAE&#39;, &#39;#1 SMP Wed Sep 15 03:27:15 UTC 2010&#39;, &#39;i686&#39;)</span>
+</pre></div>
+</div>
+<p><em>getcwd()*returns the current working directory. *chdir(path)</em> changes the current working directory to path. In the example we first see the current directory which is my home directory and change the current directory to <em>/tmp</em> and then again checking the current directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="go">&#39;/home/kushal&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/tmp&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="go">&#39;/tmp&#39;</span>
+</pre></div>
+</div>
+<p>So let us use another function provided by the os module and create our own function to list all files and directories in any given directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">view_dir</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function prints all files and directories in the given directory.</span>
+<span class="sd">    :args path: Path to the directory, default is current directory</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">names</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using the <em>view_dir</em> example.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">view_dir</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="go">.readahead bin boot dev etc home junk lib lib64 lost+found media mnt opt</span>
+<span class="go">proc root run sbin srv sys tmp usr var</span>
+</pre></div>
+</div>
+<p>There are many other very useful functions available in the OS module, you can read about them <a class="reference external" href="https://docs.python.org/3/library/os.html">here</a></p>
+</div>
+<div class="section" id="requests-module">
+<h2>Requests Module<a class="headerlink" href="#requests-module" title="Permalink to this headline">¶</a></h2>
+<p>requests is a Python module which changed the way people used to write code for many many projects. It helps
+you to do HTTP GET or POST calls in a very simple but elegant way. This is a third party module, that means
+you have to install it from your OS distribution packages, it does not come default.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># yum install python3-requests</span>
+</pre></div>
+</div>
+<p>The above command will install Python3 version of the requests module in your system.</p>
+<div class="section" id="getting-a-simple-web-pages">
+<h3>Getting a simple web pages<a class="headerlink" href="#getting-a-simple-web-pages" title="Permalink to this headline">¶</a></h3>
+<p>You can use the <em>get</em> method to fetch any website.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://google.com&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">req</span><span class="o">.</span><span class="n">status_code</span>
+<span class="go">200</span>
+</pre></div>
+</div>
+<p>The <em>text</em> attribute holds the HTML returned by the server.</p>
+<p>Using this knowledge, let us write a command which can download a given file (URL) from Internet.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="k">def</span> <span class="nf">download</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Download the given url and saves it to the current directory.</span>
+
+<span class="sd">    :arg url: URL of the file to be downloaded.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">req</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="c1"># First let us check non existing files.</span>
+    <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No such file found at </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">url</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fobj</span><span class="p">:</span>
+        <span class="n">fobj</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Download over.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter a URL:&#39;</span><span class="p">)</span>
+    <span class="n">download</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here we used something new, when the module name is <em>__main__</em>, then only
+ask for a user input and then download the given URL. This also prevents
+the same when some other Python code imports this file as a Python module.</p>
+<p>To learn more about requests module, go to their <a class="reference external" href="http://docs.python-requests.org">wonderful documentation</a>.</p>
+<p>You can actually modify the above program to become more user friendly. For example, you can check if that given
+filename already exists in the current directory or not. Use <a class="reference external" href="https://docs.python.org/3/library/os.path.html#module-os.path" title="(in Python v3.8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code></a> module for the name.</p>
+</div>
+</div>
+<div class="section" id="command-line-arguments">
+<h2>Command line arguments<a class="headerlink" href="#command-line-arguments" title="Permalink to this headline">¶</a></h2>
+<p>Do you remember your <em>ls</em> command, you can pass different kind of options as command line arguments. You can do that too .. important:: your application. Read <a class="reference external" href="https://docs.python.org/3/howto/argparse.html">this how-to</a> guide to learn about it.</p>
+</div>
+<div class="section" id="tab-completion-in-your-python-interpreter">
+<h2>TAB completion in your Python interpreter<a class="headerlink" href="#tab-completion-in-your-python-interpreter" title="Permalink to this headline">¶</a></h2>
+<p>First create a file as <em>~/.pythonrc</em> and include the following in that file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rlcompleter</span><span class="o">,</span> <span class="nn">readline</span>
+<span class="n">readline</span><span class="o">.</span><span class="n">parse_and_bind</span><span class="p">(</span><span class="s1">&#39;tab: complete&#39;</span><span class="p">)</span>
+
+
+<span class="n">history_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.python_history&#39;</span><span class="p">)</span>
+<span class="n">readline</span><span class="o">.</span><span class="n">read_history_file</span><span class="p">(</span><span class="n">history_file</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">atexit</span>
+<span class="n">atexit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">readline</span><span class="o">.</span><span class="n">write_history_file</span><span class="p">,</span> <span class="n">history_file</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Next, just export PYTHONSTARTUP variable pointing to this file from your <em>~/.bashrc</em> file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYTHONSTARTUP</span><span class="o">=~/.</span><span class="n">pythonrc</span>
+</pre></div>
+</div>
+<p>Now from future whenever you open a bash shell, you will have TAB completion and history of code entered in your
+Python interpreter.</p>
+<p>To use it in the current shell, source the bashrc file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ source ~/.bashrc
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/pym.png" alt="Logo"/>
+  </a>
+</p>
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=kushaldas&repo=pym&type=watch&count=true&size=large"
+    allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+<p>
+  pym is a book to learn Python.
+  It targets people who are completely
+  new to the language.
+</p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Modules</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#importing-modules">Importing modules</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#all-in-init-py">__all__ in __init__.py</a></li>
+<li><a class="reference internal" href="#default-modules">Default modules</a></li>
+<li><a class="reference internal" href="#module-os">Module os</a></li>
+<li><a class="reference internal" href="#requests-module">Requests Module</a><ul>
+<li><a class="reference internal" href="#getting-a-simple-web-pages">Getting a simple web pages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#command-line-arguments">Command line arguments</a></li>
+<li><a class="reference internal" href="#tab-completion-in-your-python-interpreter">TAB completion in your Python interpreter</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="classes.html"
+                          title="Previous page">&larr; Class</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="collections.html"
+                          title="Next page">&rarr; Collections module</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modules.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="collections.html" title="Collections module"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="classes.html" title="Class"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">Python for you and me 0.4.alpha1 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2008-2020, Kushal Das.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
