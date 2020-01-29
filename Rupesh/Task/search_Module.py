@@ -64,7 +64,7 @@ class searchw(object):
             print("NAme of file",filename)
             continue
         print("Name of Text file",Urls)
-        print("Resent Search:",resent)
+        print("Resent Search:",list(dict.fromkeys(resent)))
         print("Top Search:",max(set(resent), key = resent.count))
     
     def rem(self):
