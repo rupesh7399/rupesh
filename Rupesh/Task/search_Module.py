@@ -14,12 +14,24 @@ resent = []
 class MyHTMLParser(HTMLParser):
     
     def handle_starttag(self, tag, attrs):
+        
         global number_of_starttags
         number_of_starttags += 1
 
     def handle_endtag(self, tag):
+        
         global number_of_endtags
         number_of_endtags += 1
+
+    def Counthatml(self):
+        
+        for filename in Urls:
+            with open(filename, 'rt') as f:
+                for line in f:
+                    parser = MyHTMLParser()
+                    parser.feed(str(line))
+            print("File Of",filename,"Starting Tag = ",number_of_starttags,",Ending Tag = ",number_of_endtags)
+            
 
 class searchw(object):
 
@@ -63,21 +75,16 @@ class searchw(object):
             print("Avelebal words:",count)
             print("NAme of file",filename)
             continue
-        print("Name of Text file",Urls)
+        print("Name of Text file:",Urls)
         print("Resent Search:",list(dict.fromkeys(resent)))
         print("Top Search:",max(set(resent), key = resent.count))
+        print("Name of Search Word:",word)
     
     def rem(self):
         for i in Urls:
             os.remove(i)
       
-    def Counthatml(self):
-        for filename in Urls:
-            with open(filename, 'rt') as f:
-                for line in f:
-                    parser = MyHTMLParser()
-                    parser.feed(str(line))
-            print("File Of",filename,"Starting Tag = ",number_of_starttags,",Ending Tag = ",number_of_endtags)
+    
 
 while True:
     try:
@@ -97,7 +104,7 @@ while True:
             
             
         elif task == '3':
-            store.Counthatml()
+            parc.Counthatml()
             
         elif task == '4':
             store.rem()
