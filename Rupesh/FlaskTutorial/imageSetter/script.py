@@ -1,17 +1,72 @@
-from flask import Flask, request, flash, url_for, redirect,render_template
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, request, flash, url_for, redirect, render_template
+from flask import *  
+from flask_sqlalchemy import SQLAlchemy  
+import os
+from flask import flash
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:///employees.sqlite3'  
-app.config['SECRET_KEY']="secret key"
+  
+app = Flask(__name__)  
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///employees.sqlite3'  
+app.config['SECRET_KEY'] = "secret key"  
+  
+db = SQLAlchemy(app)  
+class Employees(db.Model): 
 
-db = SQLAlchemy(app)
+    
+    id = db.Column('img_id', db.Integer, primary_key = True)  
+    pw1 = db.Column(db.String(200))
+    ph1 = db.Column(db.String(200))
+    im1 = db.Column(db.String(200))
+    iw1 = db.Column(db.String(200))
+    ih1 = db.Column(db.String(200))
+    ph2 = db.Column(db.String(200))
+    im2 = db.Column(db.String(200))
+    iw2 = db.Column(db.String(200))
+    ih2 = db.Column(db.String(200))
+    ph3 = db.Column(db.String(200))
+    im3 = db.Column(db.String(200))
+    iw3 = db.Column(db.String(200))
+    ih3 = db.Column(db.String(200))
+       
+    def __init__(self,pw1, ph1, im1, iw1, ih1, ph2, im2, iw2, ih2, ph3, im3, iw3, ih3 ):
+        self.pw1 = pw1
+        self.ph1 = ph1
+        self.im1 = im1
+        self.iw1 = iw1
+        self.ih1 = ih1
+        self.ph2 = ph2
+        self.im2 = im2
+        self.iw2 = iw2
+        self.ih2 = ih2
+        self.ph3 = ph3
+        self.im3 = im3
+        self.iw3 = iw3
+        self.ih3 = ih3
+    
 
+@app.route("/login")  
+def index():
+    return render_template('login.html')
 
+@app.route("/success",methods=['GET', 'POST'])
+def success():
+     
+    if request.method == 'POST':
+        email = request.form['email']
+        pasw = request.form['pwd']
+         
+        if email == 'rupesh@gmail.com' and pasw == 'asdfgf':
+            session['email']='rupesh@gmail.com'                   
+            return render_template("home.html");
+        else:
+            flash("Email and Password are wrong!!",'error') 
+            return index()
+   
 
-@app.route("/")  
-def index():  
-    return render_template("login.html");  
+@app.route("/") 
+def home():
+     
+    return render_template("home.html");
 
 @app.route("/Image")
 def imageUpload():
@@ -20,6 +75,49 @@ def imageUpload():
 @app.route("/check")
 def checkUser():
     return render_template("upload.html");
+
+@app.route("/logout")
+def logout():
+    session.pop('email',None)  
+    flash("Logout successfully!!" ,"success")
+    return index()
+
+@app.route("/add",methods=['GET', 'POST'])
+def add():
+    try:
+        if request.method == 'POST':
+            pw1 = request.form['pw1']
+            ph1 = request.form['ph1']
+            im1 = request.form['img1']
+            iw1 = request.form['iw1']
+            ih1 = request.form['ih1']
+            ph2 = request.form['ph2']
+            im2 = request.form['img2']
+            iw2 = request.form['iw2']
+            ih2 = request.form['ih2']
+            ph3 = request.form['ph3']
+            im3 = request.form['img3']
+            iw3 = request.form['iw3']
+            ih3 = request.form['ih3']
+            employee = Employees(pw1, ph1, im1, iw1, ih1, ph2, im2, iw2, ih2, ph3, im3, iw3, ih3)
+            db.session.add(employee)
+            db.session.commit()
+            flash('Record was successfully added','success') 
+            return render_template('home.html')
+        else:
+            flash('Record was Faild !!','error') 
+            return render_template('upload.html')
+    except:
+        flash('Record was Faild !!','error') 
+        return render_template('upload.html')
+    finally:
+        flash('Record was Faild !!','error') 
+        return render_template('upload.html')
+
+    
+
+    
+    return render_template("home.html");
 
 if __name__ == '__main__':  
    db.create_all()  
