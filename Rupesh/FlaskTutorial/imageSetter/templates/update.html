@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}
+Update
+{% endblock %}
+ 
+{% block header %}
+Update
+{% endblock %}  
+
+{% block content %}
+<div style="margin-right: 10px;margin-left: 10px;">
+<form action="edits" enctype="multipart/form-data" method="POST">
+<div class="row">
+    <div class="form-group">
+        <label for="Width">Parts Width</label>
+        <input type="number" name="pw1" class="form-control" placeholder="Parts Width" id="pw1" value={{Employees.pw1}} required>
+    </div>
+</div>
+<div class="row">
+    <div class = "col-xl-4 "><header><h3>Part1</h3></header></div>
+    <div class = "col-xl-4 "><header><h3>Part2</h3></header></div>
+    <div class = "col-xl-4 "><header><h3>Part3</h3></header></div>
+</div>
+<div class="row" style="margin-top: 20px;">
+    <div class = "col-xl-4 bg-warning ">
+         
+        <div class="form-group" style="margin-top: 10px;">
+            <label for="Width">Part1 Height</label>
+            <input type="number" name="ph1" class="form-control" placeholder="Part1 Height" id="ph1" value={{Employees.ph1}} required>
+        </div>
+        
+        <div class="form-group">
+            <label for="Width">Image1:</label>
+            <input type="file" name="img1" class="" id="img1"  >
+            <br><span >{{Employees.im1}}</span>
+            <input type="text" name="image1" value={{Employees.im1}} style="display: none;" >
+            
+        </div>
+        <div class="form-group">
+            <label for="Width">Image1 Width:</label>
+            <input type="number" name="iw1" class="form-control" placeholder="Width" id="iw1" value={{Employees.iw1}} required>
+        </div>
+        <div class="form-group">
+            <label for="height">Image1 Height:</label>
+            <input type="number" name="ih1" class="form-control" placeholder="Height" id="ih1" value={{Employees.ih1}} required>
+        </div>
+    </div>
+    <div class="col-xl-4 bg-light" >
+        
+        <div class="form-group"style="margin-top: 10px;>
+            <label for="Width">Part2 Height</label>
+            <input type="number" name="ph2" class="form-control" placeholder="Part2 Height" id="ph2" value={{Employees.ph2}} required>
+        </div>
+        
+        <div class="form-group">
+            <label for="Width">Image2:</label>
+            <input type="file" name="img2" class="" id="img2" >
+            <br><span >{{Employees.im2}}</span>
+            <input type="text" name="image2" value={{Employees.im2}} style="display: none;" >
+        </div>
+        <div class="form-group">
+            <label for="Width">Image2 Width:</label>
+            <input type="number" name="iw2" class="form-control" placeholder="Width" id="iw2" value={{Employees.iw2}} required>
+        </div>
+        <div class="form-group">
+            <label for="height">Image2 Height:</label>
+            <input type="number" name="ih2" class="form-control" placeholder="Height" id="ih2" value={{Employees.ih2}} required>
+        </div>
+    </div>
+    <div class="col-xl-4 bg-warning">
+        
+        <div class="form-group"style="margin-top: 10px;>
+            <label for="Width">Part3 Height</label>
+            <input type="number" name="ph3" class="form-control" placeholder="Part3 Height" id="ph3" value={{Employees.ph3}} required>
+        </div>  
+
+        <div class="form-group">
+            <label for="Width">Image3:</label>
+            <input type="file" name="img3" class="" id="img3" >
+
+            <br><samp>{{Employees.im3}}</samp>
+            <input type="text" name="image3" value={{Employees.im3}} style="display: none;" >
+        </div>
+        <div class="form-group">
+            <label for="Width">Image3 Width:</label>
+            <input type="number" name="iw3" class="form-control" placeholder="Width" id="iw3" value={{Employees.iw3}} required>
+        </div>
+        <div class="form-group">
+            <label for="height">Image3 Height:</label>
+            <input type="number" name="ih3" class="form-control" placeholder="Height" id="ih3" value={{Employees.ih3}} required>
+        </div>
+    </div>
+</div>
+<input type="number" name = "mh" id = "p1" value="" style="display: none;"><input type="number" name="mw" id = "p2" value="" style="display: none;">
+<div class="bg-light" style="margin-top:20px ;margin-left: 40%;margin-right: 40%;">
+    <div class="row"><button type="submit" class="btn btn-primary col" style="margin-right: 10px;">Save</button>
+    </form> <a class="btn btn-danger" href ="{{url_for('home')}}" > Cancle </a>
+    </div>
+    
+</div></div>
+<script src="./static/set.js"></script>
+{% endblock %}  

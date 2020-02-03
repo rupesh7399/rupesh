@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from flask import flash
 
+
   
 app = Flask(__name__)  
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///employees.sqlite3'  
@@ -65,8 +66,8 @@ def success():
 
 @app.route("/") 
 def home():
-     
-    return render_template("home.html");
+         
+    return render_template("home.html",Employees = Employees.query.first());
 
 @app.route("/Image")
 def imageUpload():
@@ -82,42 +83,104 @@ def logout():
     flash("Logout successfully!!" ,"success")
     return index()
 
+
+    
+    
+    
+    
+
 @app.route("/add",methods=['GET', 'POST'])
 def add():
     try:
+        
         if request.method == 'POST':
-            pw1 = request.form['pw1']
-            ph1 = request.form['ph1']
-            im1 = request.form['img1']
-            iw1 = request.form['iw1']
-            ih1 = request.form['ih1']
-            ph2 = request.form['ph2']
-            im2 = request.form['img2']
-            iw2 = request.form['iw2']
-            ih2 = request.form['ih2']
-            ph3 = request.form['ph3']
-            im3 = request.form['img3']
-            iw3 = request.form['iw3']
-            ih3 = request.form['ih3']
-            employee = Employees(pw1, ph1, im1, iw1, ih1, ph2, im2, iw2, ih2, ph3, im3, iw3, ih3)
-            db.session.add(employee)
-            db.session.commit()
-            flash('Record was successfully added','success') 
-            return render_template('home.html')
+           UPLOAD_FOLDER = './static/Images/'
+           f = request.files['img1']  
+           f.save(UPLOAD_FOLDER + f.filename)
+           f1 = request.files['img2']
+           f1.save(UPLOAD_FOLDER + f1.filename)
+           f2 = request.files['img3']
+           f2.save(UPLOAD_FOLDER + f2.filename)
+           image1 = UPLOAD_FOLDER + f.filename
+           image2 = UPLOAD_FOLDER + f1.filename
+           image3 = UPLOAD_FOLDER + f2.filename
+           pw1 = request.form['pw1']
+           ph1 = request.form['ph1']
+           im1 = image1
+           iw1 = request.form['iw1']
+           ih1 = request.form['ih1']
+           ph2 = request.form['ph2']
+           im2 = image2
+           iw2 = request.form['iw2']
+           ih2 = request.form['ih2']
+           ph3 = request.form['ph3']
+           im3 = image3
+           iw3 = request.form['iw3']
+           ih3 = request.form['ih3']
+           employee = Employees(pw1  , ph1, im1, iw1, ih1, ph2, im2, iw2, ih2, ph3, im3, iw3, ih3)
+           db.session.add(employee)
+           db.session.commit()
+           flash('Record was successfully added','success') 
+           return render_template('home.html')
         else:
             flash('Record was Faild !!','error') 
             return render_template('upload.html')
-    except:
-        flash('Record was Faild !!','error') 
-        return render_template('upload.html')
-    finally:
+    except :
         flash('Record was Faild !!','error') 
         return render_template('upload.html')
 
-    
+@app.route("/update",methods=['GET', 'POST'])
+def update():
+     return render_template('update.html', Employees = Employees.query.first()) 
 
+@app.route("/edits",methods=['GET', 'POST'])
+def edits():
     
-    return render_template("home.html");
+    if request.method == 'POST':
+       
+       UPLOAD_FOLDER = './static/Images/'
+       pw1 = request.form['pw1']
+       ph1 = request.form['ph1']
+       if request.files['img1'].filename == '':
+           im1 = request.form['image1']
+       else:
+           f = request.files['img1']  
+           f.save(UPLOAD_FOLDER + f.filename)
+           im = UPLOAD_FOLDER + f.filename
+           im1 = im
+           #os.remove(request.form['image1'])
+       iw1 = request.form['iw1']
+       ih1 = request.form['ih1']
+       ph2 = request.form['ph2']
+       if request.files['img2'].filename == '':
+           im2 = request.form['image2']
+       else:
+           f1 = request.files['img2']
+           f1.save(UPLOAD_FOLDER + f1.filename)
+           im = UPLOAD_FOLDER + f1.filename
+           im2 = im
+           #os.remove(request.form['image3'])
+       iw2 = request.form['iw2']
+       ih2 = request.form['ih2']
+       ph3 = request.form['ph3']
+       if request.files['img3'] .filename == '':
+           im3 = request.form['image3']
+       else:
+           f2 = request.files['img3']
+           f2.save(UPLOAD_FOLDER + f2.filename)
+           im = UPLOAD_FOLDER + f2.filename
+           im3 = im
+           #os.remove(request.form['image3'])
+       iw3 = request.form['iw3']
+       ih3 = request.form['ih3']
+       c = Employees.query.filter_by(id = 1).update(dict(pw1 = pw1, ph1=ph1, im1=im1, iw1=iw1, ih1=ih1, ph2=ph2, im2=im2, iw2=iw2, ih2=ih2, ph3=ph3, im3=im3, iw3=iw3, ih3=ih3))
+       db.session.commit()
+       flash('Record was successfully Updated','success') 
+       return render_template('home.html')
+    else:
+        flash('Record was Faild !!','error') 
+        return render_template('update.html')
+    
 
 if __name__ == '__main__':  
    db.create_all()  

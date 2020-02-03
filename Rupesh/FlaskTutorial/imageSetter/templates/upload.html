@@ -9,7 +9,7 @@ Upload Image
 
 {% block content %}
 <div style="margin-right: 10px;margin-left: 10px;">
-<form action="add" method="POST">
+<form action="add" enctype="multipart/form-data" method="POST">
 <div class="row">
     <div class="form-group">
         <label for="Width">Parts Width</label>
@@ -76,12 +76,14 @@ Upload Image
         <div class="form-group">
             <label for="Width">Image3 Width:</label>
             <input type="number" name="iw3" class="form-control" placeholder="Width" id="iw3"required>
+            
         </div>
         <div class="form-group">
             <label for="height">Image3 Height:</label>
             <input type="number" name="ih3" class="form-control" placeholder="Height" id="ih3"required>
         </div>
     </div>
+    
 </div>
 <div class="bg-light" style="margin-top:20px ;margin-left: 40%;margin-right: 40%;">
     <div class="row"><button type="submit" class="btn btn-primary col" style="margin-right: 10px;">Uploads</button>
@@ -89,4 +91,5 @@ Upload Image
     </div>
     
 </div></div>
+<script src="./static/set.js"></script>
 {% endblock %}  
