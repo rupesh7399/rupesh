@@ -5,12 +5,13 @@ Home
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
+<div class="container" style="border-style: solid;">
 
 
-<div id = "p1"></div>
-<div id = "p2"></div>
-<div id = "p3"></div>
+    <div style="background-size: {{i.iw1}}px {{i.ih1}}px; background-image: url({{i.im1}}); width:{{i.pw1}}px; height:{{i.ph1}}px;"> </div>
+    <div style="background-size: {{i.iw2}}px {{i.ih2}}px; background-image: url({{i.im2}}); width:{{i.pw1}}px; height:{{i.ph2}}px;"> </div>
+    <div style="background-size: {{i.iw3}}px {{i.ih3}}px; background-image: url({{i.im3}}); width:{{i.pw1}}px; height:{{i.ph3}}px;"> </div>
+
 </div>
 <script src="./static/set.js"></script>
 {% endblock %}
