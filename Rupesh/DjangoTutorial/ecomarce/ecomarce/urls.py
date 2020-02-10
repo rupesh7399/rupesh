@@ -9,6 +9,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('eco.urls')),
     path('product/',include('products.urls')),
+    path('search/',include('search.urls',namespace='search')),
+    path('carts/',include('carts.urls')),
     
 ]
 

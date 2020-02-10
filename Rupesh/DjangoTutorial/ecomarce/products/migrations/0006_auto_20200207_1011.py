@@ -7,6 +7,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('products', '0005_product_slug'),
+        
     ]
 
     operations = [

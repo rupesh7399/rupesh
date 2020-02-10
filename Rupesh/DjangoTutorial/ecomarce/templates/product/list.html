@@ -1,16 +1,31 @@
 {% extends '../base.html' %}
 {% block content %}
+<div class="md-form active-cyan active-cyan-2 mb-3 ">
+  <form action="{% url 'search:search' %}">
+    <input type="submit" class="btn btn-default float-right" value="Search">
 
-<div class="card-deck" style="margin-top : 20px">
-{% for i in object_list %}
 
-<div class="card " style="width: 250px;length:250px;">
-<div class="row">
-<p  class="card-title text-left col"><b>{{i.title}}</b> </p><p  class="card-title col text-right"><b>{{i.price}}$</b> </p>
+    <input class="form-control col-12 col-sm-12 col-md-6 col-lg-4  float-right" type="text" placeholder="Search"
+      aria-label="Search" name = "q" >
+
 </div>
-  <a href= 'Detail/{{i.slug}}'><img src="{{i.image.url}}"  class="card-img-top" style="width:250px;length:250px" alt="..."></a>
-  <p class="text-center"></p>
-</div>
-    {% endfor %}
+</form>
+<br>
+<div class="card-columns" style="margin-top : 20px">
+  {% for i in object_list %}
+
+  <div class="card " style="width: 250px;length:250px;">
+    <div class="row">
+      <p class="card-title text-left col"><b>{{i.title}}</b> </p>
+      <p class="card-title col text-right"><b>{{i.price}}$</b> </p>
     </div>
+    <a href='Detail/{{i.slug}}'><img src="{{i.image.url}}" class="card-img-top" style="width:250px;length:250px"
+        alt="..."></a>
+    <p class="text-center"></p>
+  </div>
+  {% endfor %}
+</div>
 {% endblock  %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

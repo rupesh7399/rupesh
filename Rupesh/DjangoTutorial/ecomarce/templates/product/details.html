@@ -1,4 +1,23 @@
-{{object.title}}
-<br>
+{% extends "base.html" %}
 
-<img src= "{{object.image.url}}">
+{% block content %}
+    <div class="row">
+        <div class="col-6">
+            <div class='col-12 col-md-6'>
+                {% include 'product/snippat/update-cart.html' with product=object cart=cart %}
+    
+            </div>
+            <h1>{{object.title}}</h1>
+            {{object.timestamp | timesince}}
+
+            {{object.description | linebreaks}}<br/>
+            {% if object.image %}
+                <img src="{{object.image.url}}" class="img-fluid">
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+{% endblock %}
