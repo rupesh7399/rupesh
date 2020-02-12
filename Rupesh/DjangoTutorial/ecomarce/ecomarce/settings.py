@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'search',
     'tags',
     'carts',
-    'orders'
+    'orders',
+    'billing',
+    'accounts',
+    'addresses',
 
 ]
 
