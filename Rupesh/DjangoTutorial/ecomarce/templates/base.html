@@ -39,9 +39,11 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'product' %}">Products <span class="sr-only"></span></a>
-        </li> 
+        </li>
         <li class="nav-item {% if request.path == cart_url %}active{% endif %}">
-          <a class="nav-link" href="{{ cart_url }}"> {{ request.session.cart_items }} <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+          <a class="nav-link" href="{{ cart_url }}"> <span
+              class="navbar-cart-count">{{ request.session.cart_items }}</span> <i class="fa fa-shopping-cart"
+              aria-hidden="true"></i></a>
         </li>
         <li></li>
         <!-- <li class="nav-item dropdown"> -->
@@ -58,15 +60,15 @@
         <!-- <li class="nav-item"> -->
         <!-- <a class="nav-link disabled" href="#">Disabled</a> -->
         <!-- </li> -->
-       </ul> 
-       {% if user.is_authenticated %}
-       <a href="{% url 'logout' %}" class="  my-2 my-sm-0"> Logout</a> 
-          {% else %}
+      </ul>
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}" class="  my-2 my-sm-0"> Logout</a>
+      {% else %}
       <a href="{% url 'reg' %}" class="  my-2 my-sm-0"> Register</a>
       <!-- <a href=""class="btn btn-outline-success my-2 my-sm-0">Logout</a> -->
 
       <a href="{% url 'login' %}" class="btn btn-outline-success my-2 my-sm-0">Login</a>
-       {% endif %}
+      {% endif %}
 
 
 
@@ -97,3 +99,97 @@
 </body>
 
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    var productForm = $(".form-product-ajax")
+    productForm.submit(function (event) {
+      event.preventDefault();
+      var thisForm = $(this)
+      // var actionEndpoint = thisForm.attr("action");
+      var actionEndpoint = thisForm.attr("data-endpoint");
+      var httpMethod = thisForm.attr("method");
+      var formData = thisForm.serialize();
+
+      $.ajax({
+        url: actionEndpoint,
+        method: httpMethod,
+        data: formData,
+        success: function (data) {
+          var submitSpan = thisForm.find(".submit-span")
+          if (data.added) {
+            submitSpan.html("In cart <button type='submit' class='btn btn-link'>Remove?</button>")
+          } else {
+            submitSpan.html("<button type='submit'  class='btn btn-success'>Add to cart</button>")
+          }
+          var navbarCount = $(".navbar-cart-count")
+          navbarCount.text(data.cartItemCount)
+          navbarCount.text(data.cartItemCount)
+          var currentPath = window.location.href
+
+          if (currentPath.indexOf("cart") != -1) {
+            refreshCart()
+          }
+
+        },
+        error: function (errorData) {
+          console.log("error")
+          console.log(errorData)
+
+        }
+      })
+    })
+    function refreshCart() {
+      console.log("in current cart")
+      var cartTable = $(".cart-table")
+      var cartBody = cartTable.find(".cart-body")
+      var productRows = cartBody.find(".cart-product")
+      var currentUrl = window.location.href
+      var refreshCartUrl = '/api/cart/'
+      var refreshCartMethod = "GET";
+      var data = {};
+
+
+      $.ajax({
+
+        url: refreshCartUrl,
+        method: refreshCartMethod,
+        data: data,
+        success: function (data) {
+          console.log("success")
+
+          if (data.products.length > 0) {
+            // var   = $('cart-item-product-id')
+            productRows.html("")
+            i = data.products.length
+            var hiddenCartItemRemoveForm = $(".form-product-ajax")
+            
+            $.each(data.products, function (index, value) {
+              console.log(value)
+              var newCartItemRemove = hiddenCartItemRemoveForm.clone()
+              newCartItemRemove.css("display", "block")
+              // newCartItemRemove.removeClass("hidden-class")
+              newCartItemRemove.find(".cart-item-product-id").val(value.id)
+              cartBody.prepend("<tr><th scope=\"row\">" + i + "</th><td><a href='" + value.url + "'>" + value.name + "</a>" + newCartItemRemove.html() + "</td><td>" + value.price + "</td></tr>")
+              i--
+            })
+            cartBody.find(".cart-subtotal").text(data.subtotal)
+            cartBody.find(".cart-total").text(data.total)
+          } else {
+            window.location.href = currentUrl
+          }
+        },
+        error: function (errorData) {
+          console.log(url)
+          console.log("error")
+          console.log(errorData)
+        },
+
+      })
+
+
+    }
+  })
+</script>

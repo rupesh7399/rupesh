@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 
-
+from carts.views import cart_detail_api_view
 from django.contrib import admin
 from django.urls import path, include
 
@@ -11,6 +11,7 @@ urlpatterns = [
     path('product/',include('products.urls')),
     path('search/',include('search.urls',namespace='search')),
     path('carts/',include('carts.urls')),
+    path('api/cart/',cart_detail_api_view,name='api-cart'),
     path('addresses/',include('addresses.urls')),  
     path('accounts/',include('accounts.urls')),
     
