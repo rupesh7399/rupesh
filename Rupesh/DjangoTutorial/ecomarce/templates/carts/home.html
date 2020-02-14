@@ -9,30 +9,32 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>Product Name</th>
+      <th colspan="2">Product Name</th>
+      
       <th>Product Price</th>
+      
     </tr>
   </thead>
   <tbody class='cart-body'>
     {% for product in cart.products.all %}
     <tr class='cart-product '>
       <th scope="row">{{ forloop.counter }}</th>
-      <td><a href='{{ product.get_absolute_url }}'>{{ product.title }}</a> 
-        {% include 'carts/snippets/remove-product.html' with product_id=product.id %}
+      <td><a href='{{ product.get_absolute_url }}'>{{ product.title }}</a> </td>
+        <td>{% include 'carts/snippets/remove-product.html' with product_id=product.id %}
       </td>
       <td>{{ product.price }}</td>
     </tr>
     {% endfor %}
     <tr>
-      <td colspan="2"></td>
+      <td colspan="3"></td>
       <td><b>Subtotal</b> $<span class='cart-subtotal'>{{ cart.subtotal }}</span></td>
     </tr>
     <tr>
-      <td colspan="2"></td>
+      <td colspan="3"></td>
       <td><b>Total</b> $<span class='cart-total'>{{ cart.total }}</span></td>
     </tr>
     <tr>
-      <td colspan="2"></td>
+      <td colspan="3"></td>
       <td><a class='btn btn-lg btn-success' href='{% url "carts:checkout" %}'>Checkout</a></td>
     </tr>
 

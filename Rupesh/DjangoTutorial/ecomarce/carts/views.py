@@ -53,14 +53,15 @@ def cart_update(request):
                 "removed" : not added,
                 "cartItemCount" : cart_obj.products.count()
             }
-            return JsonResponse(json_data)
+            return JsonResponse(json_data, status=200) 
+            # return JsonResponse({"message":"Error 400"}, status=400) 
     return redirect("carts:cart")
 
 def checkout_home(request):
     cart_obj, cart_created = Cart.objects.new_or_get(request)
     order_obj = None
     if cart_created or cart_obj.products.count() == 0:
-        return redirect("cart:home")  
+        return redirect("cart:home")   
     
     login_form = LoginForm()
     guest_form = GuestForm()
