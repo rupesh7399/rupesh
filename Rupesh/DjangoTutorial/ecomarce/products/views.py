@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Product
 from carts.models import Cart
+from analytics.mixins import ObjectViewMixin
 
 # Create your views here.
 
@@ -21,7 +22,7 @@ class ProductFeaturedListView(ListView):
         return queryset
 
 
-class ProductSlugView(DetailView):
+class ProductSlugView(ObjectViewMixin ,DetailView):
     queryset = Product.objects.all()
     template_name = "product/details.html"
 
@@ -34,6 +35,7 @@ class ProductSlugView(DetailView):
     def get_object(self, *args, **kwargs):
         request = self.request
         slug = self.kwargs.get('slug')
+        
         try:
             instance = Product.objects.get(slug=slug, active=True)
         except Product.DoesNotExist:
@@ -43,10 +45,12 @@ class ProductSlugView(DetailView):
             instance = qs.first()
         except:
             raise Http404("Uhhmmm")
+
+        #object_viewed_singnal.send(instance.__class__, instance=instance, request=request)
         return instance
     
 
-class ProductDetailView(DetailView):
+class ProductDetailView( ObjectViewMixin, DetailView):
     #queryset = Product.objects.all()
     template_name = "product/details.html"
 

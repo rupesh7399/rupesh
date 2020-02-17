@@ -25,7 +25,8 @@ SECRET_KEY = 'fcnrh2hw(6j67hfcyee_b)^cfci(7@cgyj=()4y4**6(wm25xb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
@@ -46,8 +47,13 @@ INSTALLED_APPS = [
     'billing',
     'accounts',
     'addresses',
+    'analytics',
 
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
+FORCE_SESSION_TO_ONE = False
+FORCE_INACTIVE_USER_ENDSESSION =False
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

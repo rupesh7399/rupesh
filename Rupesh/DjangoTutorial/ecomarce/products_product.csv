@@ -1,0 +1,7 @@
+id,title,description,price,image,active,featured,slug,timestamp
+1,hat,big cap,39.99,products/3639124299/3639124299.jpeg,1,0,hat,2020-02-08 10:22:03.820761
+2,shirts,"color:white,size:xl",40.02,products/438168279/438168279.jpeg,1,0,abc,2020-02-08 10:22:03.820761
+3,pantes,pants,39.99,products/1179148326/1179148326.jpeg,1,0,pantes,2020-02-08 10:22:03.820761
+4,T-shirt,asd,39.99,products/2408864833/2408864833.jpeg,1,0,t-shirt,2020-02-08 10:22:03.820761
+5,Mouse,wired black logitech mouse,70.99,products/3021435425/3021435425.jpeg,1,1,mouse,2020-02-08 10:22:03.820761
+6,Keyboard,logitech black wired keyboard,120,products/2242538083/2242538083.jpeg,1,1,keyboard,2020-02-08 10:22:03.820761
