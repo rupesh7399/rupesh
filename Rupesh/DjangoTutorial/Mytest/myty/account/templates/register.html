@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Register
+
+        </title>
+
+    </head>
+    <body>
+        <h1>Register</h1>
+        <form method='POST'>
+             {% csrf_token %}
+            
+            <label>Fullname:</label><br>
+            {{form.full_name}}
+            <br><label>Email:</label><br>
+            {{form.email}}
+            <br><label>Password:</label><br>
+            {{form.password1}}
+            <br><label>Conform Password:</label><br>
+            {{form.password2}}<br>
+            <button type='submit' class='btn btn-default'>Submit</button>
+          </form>
+    </body>
+</html>
