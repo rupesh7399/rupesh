@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+<div class="col-4"></div>
+<div class = "col-6">
+<form method='POST' class= "form">
+
+{% csrf_token %}
+<div class=row>
+<div class="col-2">Title</div><div class="col-4">{{form.title}}</div>
+</div>
+<div class=row>
+<div class="col-2">Description</div><div class="col-4">{{form.description}}</div>
+</div>
+<div class=row>
+<div class="col-2">Last Date</div><div class="col-4">{{form.lastdate}}</div>
+</div>
+<div class=row>
+<div class="col-2">Inspect</div><div class="col-4">{{form.Inspect}}</div>
+</div>
+
+<button type='submit' class='btn btn-default btn-success'>Create</button>
+</form>
+</div>
+</div>
+{% endblock  %}
