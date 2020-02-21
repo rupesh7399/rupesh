@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block header %}
+List of Task
+{% endblock  %}
+{% block content %}
+{% for i in object_list %}
+<p>{{i.title}}<p>
+ {% endfor %}
+{% endblock  %}

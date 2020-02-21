@@ -8,7 +8,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.models import User, auth
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class RegisterView(CreateView):
     form_class = RegisterForm
@@ -36,7 +37,11 @@ class LoginView(FormView):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            request.session['email'] = user.id
+            a = User.objects.get(email = email)
+            print(a.id)
+            #request.session['email'] = a.email
+            request.session['u_id'] = a.id
+            print(request.session['u_id'])
             if is_safe_url(redirect_path, request.get_host()):
                 return redirect(redirect_path)
             else:
