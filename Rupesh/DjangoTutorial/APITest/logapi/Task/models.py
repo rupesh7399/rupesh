@@ -6,6 +6,10 @@ from django.urls import reverse
 User = settings.AUTH_USER_MODEL
 
 
+
+
+    
+
 class Task(models.Model):
     user = models.ForeignKey(User, related_name='fuser',
                              on_delete=models.CASCADE)

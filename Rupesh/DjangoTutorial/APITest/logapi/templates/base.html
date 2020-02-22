@@ -16,7 +16,7 @@
   <body>
 <div>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">ToDo</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -47,10 +47,15 @@
     
     {% comment %} <form class="form-inline my-2 my-lg-0"> {% endcomment %}
       {% comment %} <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> {% endcomment %}
+      <li>
+      <a class="nav-link" href="{% url 'create' %}">Create<i class="fa fa-plus"
+        aria-hidden="true"></i></a></li>
+        <li>
+      <a class="nav-link" href="{% url 'List' %}"><i class="fa fa-tasks"
+              aria-hidden="true"></i></a></li>
       </ul>
       Hello,{{user.full_name}}
-      <a class="nav-link" href="{% url 'create' %}"><i class="fa fa-tasks"
-              aria-hidden="true"></i></a> 
+       
       <a href="{% url 'logout' %}" class="btn btn-link my-2 my-sm-0" type="submit">Logout</a>
       
       {% else %}

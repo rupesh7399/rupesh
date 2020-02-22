@@ -6,6 +6,13 @@
 <form method='POST' class= "form">
 
 {% csrf_token %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 <div class=row>
 <div class="col-2">Title</div><div class="col-4">{{form.title}}</div>
 </div>
