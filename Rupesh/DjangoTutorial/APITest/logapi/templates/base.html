@@ -26,10 +26,15 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'login' %}">Home <span class="sr-only">(current)</span></a>
       </li>
-      {% if user.is_authenticated %}
+      {% if request.session.u_id %}
       <li class="nav-item">
         
-      </li> 
+      <a class="nav-link" href="{% url 'create' %}">Create<i class="fa fa-plus"
+        aria-hidden="true"></i></a></li>
+        <li>
+        
+      <a class="nav-link" href="{% url 'List' %}"><i class="fa fa-tasks"
+              aria-hidden="true"></i></a></li> 
       {% comment %} <li class="nav-item dropdown"> {% endcomment %}
         {% comment %} <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {% endcomment %}
           {% comment %} Dropdown {% endcomment %}
@@ -48,11 +53,7 @@
     {% comment %} <form class="form-inline my-2 my-lg-0"> {% endcomment %}
       {% comment %} <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> {% endcomment %}
       <li>
-      <a class="nav-link" href="{% url 'create' %}">Create<i class="fa fa-plus"
-        aria-hidden="true"></i></a></li>
-        <li>
-      <a class="nav-link" href="{% url 'List' %}"><i class="fa fa-tasks"
-              aria-hidden="true"></i></a></li>
+      </li>
       </ul>
       Hello,{{user.full_name}}
        
@@ -76,5 +77,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   </body>
 </html>

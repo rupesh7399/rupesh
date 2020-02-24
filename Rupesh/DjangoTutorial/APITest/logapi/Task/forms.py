@@ -13,4 +13,3 @@ class CreateTask(forms.Form):
         }))
      Inspect = forms.ModelMultipleChoiceField(queryset=User.objects.all(),widget=forms.SelectMultiple(attrs={"class": "form-control",}))
      
-    

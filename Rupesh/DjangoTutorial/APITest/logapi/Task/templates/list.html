@@ -1,9 +1,28 @@
 {% extends 'base.html' %}
-{% block header %}
-List of Task Status
-{% endblock  %}
+
 {% block content %}
 <div class="container">
+ <ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#home">Status</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#menu1">Edit</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#menu2">Superwise Task</a>
+  </li>
+  
+  
+  
+</ul> 
+
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>Status</h3>
+      
+
 <table class="table table-bordered">
 <thead class="thead-light">
 <tr rowspan="2">
@@ -14,6 +33,7 @@ List of Task Status
     <th rowspan="2" style="vertical-align : middle;text-align:center;"  >Watcher</th>
     <th rowspan="2" style="vertical-align : middle;text-align:center;"  >Create Time</th>
     <th colspan="2" class="text-center">Task Progress  </th>
+    <th rowspan="2">*</th>
 
 </tr>
 <tr >
@@ -21,7 +41,7 @@ List of Task Status
 <th>Start Time</th><th>End Time</th>
 </tr>
 </thead>
-{% for i in object_list %}
+{% for i in user %}
 <tr>
     <td>{{forloop.counter}}</td>
     <td>{{i.title}}</td>
@@ -40,10 +60,10 @@ List of Task Status
         {% csrf_token %}
         
         <input class='' type='hidden' name='task_id' value='{{ i.id }}' />
-        <button type="submit" class="btn btn-success ">Start</button>
+        <button type="submit" id = "s1" class="btn btn-success ">Start</button>
         
         {% elif i.startTime != None and i.endTime == None  %}
-        <lable class="worning">Progress..</lable> 
+            <i class="fas fa-circle-notch fa-spin"></i><lable class="worning" >Progress..</lable> 
         {% elif i.startTime != None and i.endTime != None %}
         <lable class="success">{{i.startTime}}</lable>
         {% endif %}
@@ -64,8 +84,142 @@ List of Task Status
     Not Started
             {% endif %}
     </td>
+    <td><a href="{% url 'Details' i.id  %}" ><i class="fas fa-eye"></i></a>&nbsp;<a href="{% url 'delete' i.id  %}" class="text-danger" ><i class="far fa-trash-alt"></i></a></td> 
 </tr>
  {% endfor %}
  </table>
+ 
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Edit</h3>
+      <h5 class="text-danger"><b> *if Task is complate that Task is Not Editable </b></h5>
+      
+<table class="table table-bordered">
+<thead class="thead-light">
+<tr rowspan="2">
+    <th rowspan="2" style="vertical-align : middle;text-align:center;" >#</th>
+    <th rowspan="2" style="vertical-align : middle;text-align:center;"  >Title</th>
+    <th rowspan="2" style="vertical-align : middle;text-align:center;"  >Description</th>
+    <th rowspan="2" style="vertical-align : middle;text-align:center;"  >Last Date</th>
+    <th rowspan="2" style="vertical-align : middle;text-align:center;"  >Watcher</th>
+    <th rowspan="2" style="vertical-align : middle;text-align:center;"  >Create Time</th>
+    <th colspan="2" class="text-center">Task Progress  </th>
+    <th rowspan="2">*</th>
+
+</tr>
+<tr >
+
+<th>Start Time</th><th>End Time</th>
+</tr>
+</thead>
+{% for i in user %}
+<tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{i.title}}</td>
+    <td>{{i.description}}</td>
+    <td>{{i.lastDate}}</td>
+    
+    <td>{% for j in i.Inspect.all %}
+        {{j.full_name}}
+    {% endfor %}
+    </td>
+           
+    <td>{{i.timestamp}}</td>
+    <td>
+    {% if i.startTime == None %}
+        Not Start
+        {% elif i.startTime != None and i.endTime == None  %}
+        <i class="fas fa-circle-notch fa-spin"></i>
+        <lable class="worning">Progress..</lable> 
+        {% elif i.startTime != None and i.endTime != None %}
+        <lable class="success">{{i.startTime}}</lable>
+        {% endif %}
+    
+    <td>  
+    
+     {% if i.startTime != None and i.endTime == None  %}
+      <a href = "{% url 'update' i.id  %}"><i class="far fa-edit"></i></a>
+     {% elif i.startTime != None and i.endTime != None %}
+        <lable class="danger">{{i.endTime}}</lable>  
+    {% else %} 
+     <a href = "{% url 'update' i.id  %}"><i class="far fa-edit"></i></a>
+
+            {% endif %}
+    </td>
+    <td><a href="{% url 'Details' i.id  %}" ><i class="fas fa-eye"></i></a></td> 
+</tr>
+ {% endfor %}
+ </table>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Supervise Task</h3>
+      
+<table class="table table-bordered">
+<thead class="thead-light">
+<tr rowspan="2">
+    <th rowspan="2" style="vertical-align : middle;text-align:center;" >#</th>
+    <th rowspan="2" style="vertical-align : middle;text-align:center;"  >Title</th>
+    <th rowspan="2" style="vertical-align : middle;text-align:center;"  >Description</th>
+    <th rowspan="2" style="vertical-align : middle;text-align:center;"  >Last Date</th>
+    <th rowspan="2" style="vertical-align : middle;text-align:center;"  >Watcher</th>
+    <th rowspan="2" style="vertical-align : middle;text-align:center;"  >Create Time</th>
+    <th colspan="2" class="text-center">Task Progress  </th>
+
+</tr>
+<tr >
+
+<th>Start Time</th><th>End Time</th>
+</tr>
+</thead>
+{% for i in watcher %}
+<tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{i.title}}</td>
+    <td>{{i.description}}</td>
+    <td>{{i.lastDate}}</td>
+    
+    <td>{% for j in i.Inspect.all %}
+        {{j.full_name}}
+    {% endfor %}
+    </td>
+           
+    <td>{{i.timestamp}}</td>
+    <td>
+    {% if i.startTime == None %}
+        Not Started    
+        {% elif i.startTime != None and i.endTime == None  %}
+        <i class="fas fa-circle-notch fa-spin"></i>
+        <lable class="worning">Progress..</lable> 
+        {% elif i.startTime != None and i.endTime != None %}
+        <lable class="success">{{i.startTime}}</lable>
+        {% endif %}
+    
+    <td>  
+    </form>  
+     {% if i.startTime != None and i.endTime == None  %}
+    
+    
+    
+        
+        Not Complate
+    
+     {% elif i.startTime != None and i.endTime != None %}
+        <lable class="danger">{{i.endTime}}</lable>  
+    {% else %} 
+    Not Started
+            {% endif %}
+    </td>
+    <td><a href="{% url 'Details' i.id  %}" ><i class="fas fa-eye"></i></a></td> 
+</tr>
+ {% endfor %}
+ </table>
+    </div>
+    
+  </div>
+</div>
+
+
  </div>
+ <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
 {% endblock  %}
